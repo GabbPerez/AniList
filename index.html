@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AniList</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="icon" href="./assets/AniLogoList.svg">
+    <script src="https://kit.fontawesome.com/c8e4d183c2.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="nav__wrapper--img">
+        <nav>
+            <div class="row nav__bar">
+                <div class="nav__logo--text">
+                    <img src="./assets/AniLogoList.svg" alt="" class="nav__logo allow" onclick="window.location.reload()">
+                    <!-- <h3 class="nav__logo--title allow" onclick="window.location.reload()">AniList</h3> -->
+                </div>
+                <ul class="nav__links">
+                    <li><a href="#" class="nav__link link__hover-effect" onclick="window.location.reload()">Home</a></li>
+                    <li><a href="https://myanimelist.net/topanime.php?type=airing" class="nav__link link__hover-effect" target="_blank">Trending</a></li>
+                    <li><a href="#" class="nav__link link__hover-effect disabled nav__link--primary">Contact</a></li>
+                </ul>
+            </div>
+            <div class="row nav__primary">
+                <h1 class="nav__primary--title">Browse for your Anime!</h1>
+                <div class="bar">
+                    <input id="search" type="text" name="title" class="search__bar" placeholder="Enter a title" onkeypress="main(event)">
+                    <button class="search-enter" onclick="main(event)"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+        </nav>
+
+        <section id="searches">
+            <div class="row top__bar">
+        
+            </div>
+
+            <div class="card__container">
+                <i class="fas fa-spinner cards--spinner"></i>
+                <div class="card">
+                    <img class="card-img" src="./assets/mushokutenseip2.jpg" alt="">
+                    <div class="card__top--text">
+                        <h2 class="card--title">Mushoku Tensei P2</h2>
+                        <h3 class="card--subtitle">Episode Count: 12</h3>
+                        <h3 class="card--score">MAL Score: 8.79</h3>
+                    </div>
+                    <button class="read-more">
+                        <a class="read-more__button" href="https://myanimelist.net/anime/45576/Mushoku_Tensei__Isekai_Ittara_Honki_Dasu_Part_2" target="_blank">
+                            <div class="read-more__text">Read More</div>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </button>
+                </div>
+                <div class="card">
+                    <img class="card-img" src="./assets/jujutsukaisen.jpg" alt="">
+                    <div class="card__top--text">
+                        <h2 class="card--title">Jujutsu Kaisen</h2>
+                        <h3 class="card--subtitle">Episode Count: 24</h3>
+                        <h3 class="card--score">MAL Score: 8.71</h3>
+                    </div>
+                    <button class="read-more">
+                        <a class="read-more__button" href="https://myanimelist.net/anime/40748/Jujutsu_Kaisen_TV" target="_blank">
+                            <div class="read-more__text">Read More</div>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </button>
+                </div>
+                <div class="card">
+                    <img class="card-img" src="./assets/AOT_Original-KV_Logo_Copyright.jpeg" alt="">
+                    <div class="card__top--text">
+                        <h2 class="card--title">Attack on Titan S4 P2</h2>
+                        <h3 class="card--subtitle">Episode Count: 12</h3>
+                        <h3 class="card--score">MAL Score: 8.89</h3>
+                    </div>
+                    <button class="read-more">
+                        <a class="read-more__button" href="https://myanimelist.net/anime/48583/Shingeki_no_Kyojin__The_Final_Season_Part_2" target="_blank">
+                            <div class="read-more__text">Read More</div>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </button>
+                </div>
+                <div class="card">
+                    <img class="card-img" src="./assets/dressupdarling.png" alt="">
+                    <div class="card__top--text">
+                        <h2 class="card--title">My Dress-Up Darling</h2>
+                        <h3 class="card--subtitle">Episode Count: 12</h3>
+                        <h3 class="card--score">MAL Score: 8.37</h3>
+                    </div>
+                    <button class="read-more">
+                        <a class="read-more__button" href="https://myanimelist.net/anime/48736/Sono_Bisque_Doll_wa_Koi_wo_Suru" target="_blank">
+                            <div class="read-more__text">Read More</div>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </button>
+                </div>
+                
+
+                <div class="card">
+                    <img class="card-img" src="./assets/tagakisans3.jpeg" alt="">
+                    <div class="card__top--text">
+                        <h2 class="card--title">Teasing Master Tagaki</h2>
+                        <h3 class="card--subtitle">Episode Count: 12</h3>
+                        <h3 class="card--score">MAL Score: 8.40</h3>
+                    </div>
+                    <button class="read-more">
+                        <a class="read-more__button" href="https://myanimelist.net/anime/49721/Karakai_Jouzu_no_Takagi-san_3" target="_blank">
+                            <div class="read-more__text">Read More</div>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </button>
+                </div>
+                <div class="card ">
+                    <img class="card-img" src="./assets/demon-slayer-s2-1.jpeg" alt="">
+                    <div class="card__top--text">
+                        <h2 class="card--title">Demon Slayer: Red Light District Arc</h2>
+                        <h3 class="card--subtitle">Episode Count: 11</h3>
+                        <h3 class="card--score">MAL Score: 8.70</h3>
+                    </div>
+                    <button class="read-more">
+                        <a class="read-more__button" href="https://myanimelist.net/anime/47778/Kimetsu_no_Yaiba__Yuukaku-hen" target="_blank">
+                            <div class="read-more__text">Read More</div>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </button>
+                </div> 
+            </div>
+        </section>
+        
+        <footer>
+            <div class="footer__row">
+                <img class="footer__logo" src="assets/AniLogoList.svg">
+                <p class="footer__copyright">Copyright &copy;2022 Gabriel Perez</p>
+            </div>
+        </footer>
+    </div>
+</body>
+<script src="index.js"></script>
+</html>
