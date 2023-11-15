@@ -1,41 +1,58 @@
-//API Path : https://api.jikan.moe/v3
-const animeListEl = document.querySelector(".card__container");
-const cardContainerEl = document.querySelector('.card__container');
+const API_URL = 'https://api.jikan.moe/v4';
 
+document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('search');
+    const searchButton = document.querySelector('.search-enter');
+    const cardContainerEl = document.querySelector(".card__container");
+    const animeListEl = document.querySelector(".card__container");
 
-main = async(event) => {
-   if (event.keyCode===13){
-    // cardContainerEl.classList += ' cards__loading';
-    var elem = document.querySelector('input').value;
-    const anime = await fetch(`https://api.jikan.moe/v3/search/anime?q=${elem}&limit=9`)
-    const animeData = await anime.json();
-    console.log(animeData);
-    const animeSearch = animeData.results.filter((anime) => ((anime.type === "TV") && (anime.title.toLowerCase().includes(elem))) || anime.type === "TV");
-    // setTimeout(function() {cardContainerEl.classList.remove('cards__loading');}, 2000);
-    cardContainerEl.innerHTML = animeSearch.map(() => skeletonLoadingState).join("");
-    setTimeout(function() {animeListEl.innerHTML = animeSearch.map((anime) => animeHTML(anime)).join("")}, 2000);
+    searchInput.addEventListener('keypress', function (event) {
+        if (event.key === 'Enter') {
+            main(event);
+        }
+    });
 
-    // animeListEl.classList += ' cards__loading';
-    // if (!cards) {
-    //   cards = await searchAnime();
-    // }
-    // animeListEl.classList.remove('cards__loading');
+    searchButton.addEventListener('click', function (event) {
+        main({key: 'Enter'}); // Simulate an Enter keypress event
+    });
 
-    // setTimeout(animeListEl.innerHTML = animeSearch.map((anime) => animeHTML(anime)).join(""), 4000);
-    // const other = animeSearch.map(anime => anime.mal_id);
-    // console.log(other);
-    // const otherAnimeData = await fetch(`https://api.jikan.moe/v3/anime/16498/episodes`);
-    // const data = await otherAnimeData.json();
-    // const moreAnimeData = animeData.results;
-    // console.log(moreAnimeData);
-  }
-}
+// Define the main function here
+    async function main(event) {
+        if (event.key === 'Enter') {
+            cardContainerEl.classList.add('cards_loading');
+            const searchValue = searchInput.value;
+            try {
+                // Properly handle the API call with a try-catch block
+                // const response = await fetch(`https://api.jikan.moe/v3/search/anime?q=${encodeURIComponent(searchValue)}&limit=9`);
+                const response = await fetch(`${API_URL}/anime?q=${searchValue}&limit=9`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const animeData = await response.json();
+                const animeSearch = animeData.data.filter(anime => anime.type === "TV" && (
+                    anime.title.toLowerCase().includes(searchValue.toLowerCase()) || anime.title_english.toLowerCase().includes(searchValue.toLowerCase())
+                ));
+                // const animeSearch = animeData.filter(anime => anime.type === "TV" && anime.title.toLowerCase().includes(searchValue.toLowerCase()));
+                console.log(animeSearch)
+                // Using setTimeout to simulate a loading delay if necessary
+                setTimeout(() => {
+                    cardContainerEl.classList.remove('cards_loading');
+                    animeListEl.innerHTML = animeSearch.map(anime => animeHTML(anime)).join('');
+                }, 2000);
 
-main();
+            } catch (error) {
+                console.error('Fetching anime data failed:', error);
+                // Handle the error state appropriately here
+                cardContainerEl.classList.remove('cards_loading');
+                animeListEl.innerHTML = '<p>Error loading anime data. Please try again later.</p>';
+            }
+        }
+    }
 
-animeHTML = (an) => {
-  return `<div class="card">
-  <img class="card-img" src="${an.image_url}" alt="">
+// Define the animeHTML function here
+    function animeHTML(an) {
+        return `<div class="card">
+  <img class="card-img" src="${an.images.jpg.image_url}" alt="">
   <div class="card__top--text">
       <h2 class="card--title">${an.title}</h2>
       <h3 class="card--subtitle">Episode Count: ${an.episodes}</h3>
@@ -48,15 +65,5 @@ animeHTML = (an) => {
     </a>
   </button>
 </div>`;
-}
-
-skeletonLoadingState =
-`<div class="card card__skeleton">
-    <div class="card__img--skeleton"></div>
-    <div class="card--title--skeleton"></div>
-    <div class="card--subtitle--skeleton"></div>
-    <div class="card--score--skeleton"></div>
-  </div>`;
-
-
-
+    }
+});
